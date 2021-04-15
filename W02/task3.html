@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>W02: task 3</title>
+    </head>
+    <body>
+        <h2>Input Three Cooridinates</h2>
+        <label>
+            x0:<input type=number id="x0">
+        </label>
+        <label>
+            y0:<input type=number id="y0">
+        </label>
+        <label>
+            z0:<input type=number id="z0">
+        </label>
+        <br><br>
+        <label>
+            x1:<input type=number id="x1">
+        </label>
+        <label>
+            y1:<input type=number id="y1">
+        </label>
+        <label>
+            z1:<input type=number id="z1">
+        </label>
+        <br><br>
+        <label>
+            x2:<input type=number id="x2">
+        </label>
+        <label>
+            y2:<input type=number id="y2">
+        </label>
+        <label>
+            z2:<input type=number id="z2">
+        </label>
+        <br><br>
+        <input type="button" id="area" onclick="calculation()" value="Calculate">
+
+        <p>Result : <span id="result"></span></p>
+
+        <script src="vec3.js"></script>
+        <script>
+            function calculation(){
+                var x0 = Number(document.getElementById("x0").value);
+                var y0 = Number(document.getElementById("y0").value);
+                var z0 = Number(document.getElementById("z0").value);
+                var x1 = Number(document.getElementById("x1").value);
+                var y1 = Number(document.getElementById("y1").value);
+                var z1 = Number(document.getElementById("z1").value);
+                var x2 = Number(document.getElementById("x2").value);
+                var y2 = Number(document.getElementById("y2").value);
+                var z2 = Number(document.getElementById("z2").value);
+
+                var v0 = new Vec3( x0, y0, z0);
+                var v1 = new Vec3( x1, y1, z1);
+                var v2 = new Vec3( x2, y2, z2);
+
+                var S = document.getElementById("result");
+                S.innerText = AreaOfTriangle( v0, v1, v2);
+            }
+
+            function AreaOfTriangle( v0, v1, v2){
+                //Create Vector
+                var v1_v0 = v1.sub(v0);
+                var v2_v0 = v2.sub(v0);
+
+                //Calcu Area
+                var k = Math.pow(v1_v0.y*v2_v0.z - v1_v0.z*v2_v0.y, 2);
+                var l = Math.pow(v1_v0.z*v2_v0.x - v1_v0.x*v2_v0.z, 2);
+                var m = Math.pow(v1_v0.x*v2_v0.y - v1_v0.y*v2_v0.x, 2);
+
+                var S = 1/2*Math.sqrt(k + l + m);
+                return S;
+            }
+        </script>
+    </body>
+</html>
